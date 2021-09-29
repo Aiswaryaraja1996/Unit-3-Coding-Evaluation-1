@@ -1,3 +1,95 @@
 {
-    "products": []
+  "products": [
+    {
+      "name": "Watch",
+      "price": 3200,
+      "currency": "Rs",
+      "available_qty": 2,
+      "id": 1
+    },
+    {
+      "name": "",
+      "price": 0,
+      "currency": "",
+      "available_qty": 0,
+      "id": 2
+    },
+    {
+      "name": "",
+      "price": 0,
+      "currency": "",
+      "available_qty": 0,
+      "id": 3
+    },
+    {
+      "name": "Watch",
+      "price": 3200,
+      "currency": "Rs",
+      "available_qty": 2,
+      "id": 4
+    },
+    {
+      "name": "",
+      "price": 0,
+      "currency": "",
+      "available_qty": 0,
+      "id": 5
+    },
+    {
+      "name": "Watch",
+      "price": 3200,
+      "currency": "Rs",
+      "available_qty": 2,
+      "id": 6
+    },
+    {
+      "name": "Watch",
+      "price": "3200",
+      "curr": "Rs",
+      "qty": "2",
+      "id": 7
+    },
+    {
+      "name": "Watch",
+      "price": "3200",
+      "curr": "Rs",
+      "qty": "2",
+      "id": 8
+    },
+    {
+      "name": "Watch",
+      "price": "3200",
+      "curr": "Rs",
+      "qty": "2",
+      "id": 9
+    },
+    {
+      "name": "Watch",
+      "price": "3200",
+      "curr": "Rs",
+      "qty": "2",
+      "id": 10
+    },
+    {
+      "name": "Watch",
+      "price": "3200",
+      "curr": "Rs",
+      "qty": "2",
+      "id": 11
+    },
+    {
+      "name": "",
+      "price": "",
+      "curr": "",
+      "qty": "",
+      "id": 12
+    },
+    {
+      "name": "",
+      "price": "",
+      "curr": "",
+      "qty": "",
+      "id": 13
+    }
+  ]
 }

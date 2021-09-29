@@ -18,17 +18,55 @@
           <input type="text" id="price" />
           <br />
           <label for="currency">Currency</label>
+          <input type="text" id="currency" />
+          <br />
+          <label for="qty">Quantity</label>
+          <input type="text" id="qty" />
+          <br />
+          <input type="submit" id="addProduct" value="Add Product" />
         </form>
       </div>
     </div>
     <script>
       window.addEventListener("load", function () {
-        fetchPost();
+        // fetchPost();
+        var submit = document.getElementById("addProduct");
+        submit.addEventListener("click", handleSubmit);
       });
+
+      async function handleSubmit(e) {
+        e.preventDefault();
+        var name = document.getElementById("name").value;
+        var price = document.getElementById("price").value;
+        var curr = document.getElementById("currency").value;
+        var qty = document.getElementById("qty").value;
+
+        console.log(name, price, curr, qty);
+
+        var post = await postProduct({ name, price, curr, qty });
+
+        await fetchPost();
+      }
+
+      function postProduct(data) {
+        var config = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+
+        return fetch("http://localhost:3001/products", config).then(function (
+          response
+        ) {
+          return response.json();
+        });
+      }
 
       async function fetchPost() {
         const result = await getPost();
-        console.log(result);
+        display(result);
       }
 
       function getPost() {
@@ -38,6 +76,8 @@
           return response.json();
         });
       }
+
+      function display(res) {}
     </script>
   </body>
 </html>
