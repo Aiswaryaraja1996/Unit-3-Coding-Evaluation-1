@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PRODUCTS</title>
     <style>
-      .body {
+      body,
+      h3 {
         margin: 0px;
         padding: 0px;
       }
@@ -19,10 +20,27 @@
         margin: 20px;
         padding: 10px;
       }
+
+      header {
+        width: 100%;
+        height: 80px;
+        background-color: rgba(2, 4, 29, 0.932);
+        color: white;
+      }
+
+      .main-container {
+        top: 100px;
+        position: relative;
+        padding:20px;
+      }
+
+
     </style>
   </head>
   <body>
-    <header></header>
+    <header>
+      <h3>Add Your Favourite Products</h3>
+    </header>
     <div class="main-container">
       <div class="form-wrap">
         <form>
@@ -42,17 +60,51 @@
         </form>
 
         <div id="list-container"></div>
-        <footer>
-          <div id="pagination"></div>
-        </footer>
+        <div id="pagination"></div>
       </div>
     </div>
     <script>
+      let currentPage = 1;
+      let limit = 5;
+
       window.addEventListener("load", function () {
         fetchPost();
+        createPagination();
         var submit = document.getElementById("addProduct");
         submit.addEventListener("click", handleSubmit);
+
+        var pagination = document.getElementById("pagination");
+        pagination.addEventListener("click", handlePagination);
       });
+
+      function createPagination() {
+        var pageSection = document.getElementById("pagination");
+        pageSection.innerHTML = null;
+
+        var prev = document.createElement("button");
+        prev.name = currentPage - 1;
+        prev.textContent = "Previous";
+        if (currentPage === 1) {
+          prev.disabled = true;
+        }
+
+        var curr = document.createElement("button");
+        curr.name = currentPage;
+        curr.textContent = currentPage;
+
+        var next = document.createElement("button");
+        next.name = currentPage + 1;
+        next.textContent = "Next";
+
+        pageSection.append(prev, curr, next);
+      }
+
+      function handlePagination() {
+        var pageNumber = parseInt(event.target.name);
+        currentPage = pageNumber;
+        fetchPost(currentPage, limit);
+        createPagination();
+      }
 
       async function handleSubmit(e) {
         e.preventDefault();
@@ -65,7 +117,7 @@
 
         var post = await postProduct({ name, price, curr, qty });
 
-        await fetchPost();
+        await fetchPost(currentPage, limit);
       }
 
       function postProduct(data) {
@@ -84,15 +136,17 @@
         });
       }
 
-      async function fetchPost() {
-        const result = await getPost();
+      async function fetchPost(page, limit) {
+        var page = page || 1;
+        var limit = limit || 5;
+        const result = await getPost(page, limit);
         display(result);
       }
 
-      function getPost() {
-        return fetch("http://localhost:3001/products").then(function (
-          response
-        ) {
+      function getPost(page, limit) {
+        return fetch(
+          `http://localhost:3001/products?_page=${page}&_limit=${limit}`
+        ).then(function (response) {
           return response.json();
         });
       }
